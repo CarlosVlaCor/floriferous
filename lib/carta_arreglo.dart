@@ -2,7 +2,7 @@ import 'carta_flor.dart';
 
 enum ParametroCarta{flor, color, insecto}
 class ValorInsectoNoValido implements Exception{}
-
+class ParametroYaPuntuado implements Exception{}
 class CartaArreglo{
     late final TipoFlor _tipoFlor;
     late final ColorFlor _colorFlor;
@@ -42,12 +42,15 @@ class CartaArreglo{
 
         switch(parametroCarta){
           case ParametroCarta.flor:
+          if(_cumpleConTipoFlor == false){
             _puntos+=1;
-            _cumpleConTipoFlor = true;
+            _cumpleConTipoFlor = true; 
+          }
           break;
           case ParametroCarta.color:break;
           case ParametroCarta.insecto: break;
         }
+
     }
 
 

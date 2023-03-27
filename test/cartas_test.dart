@@ -31,8 +31,14 @@ void main() {
     cartaArreglo.puntuarArreglo(cartaFlor, ParametroCarta.flor);
     expect(cartaArreglo.puntos, equals(1));
   });
-  
 
+   test('Si se quiere volver a puntear el mismo parametro de la flor de Carta arreglo, no se puntua', () {
+    CartaFlor cartaFlor = CartaFlor(tipoFlor: TipoFlor.amapola, colorFlor: ColorFlor.naranja);
+    CartaArreglo cartaArreglo = CartaArreglo(TipoFlor.amapola, ColorFlor.naranja, Insecto.polilla);
+    cartaArreglo.puntuarArreglo(cartaFlor, ParametroCarta.flor);
+    cartaArreglo.puntuarArreglo(cartaFlor, ParametroCarta.flor);
+    expect(cartaArreglo.puntos, equals(1));
+  });
   });
   
 }
