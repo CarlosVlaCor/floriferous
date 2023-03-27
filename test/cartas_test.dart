@@ -1,8 +1,9 @@
-import 'package:floriferous/floriferous.dart';
+import 'package:floriferous/carta_flor.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('Si CartaFlor(TipoFlor.amapola, ColorFlor.morado) la descripción será Flor amapola color morado', () {
+  group('Cartas flor', () {
+    test('Si CartaFlor(TipoFlor.amapola, ColorFlor.morado) la descripción será Flor amapola color morado', () {
     CartaFlor cartaFlor = CartaFlor(tipoFlor: TipoFlor.amapola, colorFlor: ColorFlor.morado);
     expect(cartaFlor.descripcionCarta(), equals("Flor amapola color morado"));
   });
@@ -10,14 +11,19 @@ void main() {
   test('Si CartaFlor(TipoFlor.amapola, ColorFlor.morado, Insecto.abeja) la descripción será Flor amapola color morado con abeja', () {
     CartaFlor cartaFlor = CartaFlor(tipoFlor: TipoFlor.amapola, colorFlor: ColorFlor.morado, insecto: Insecto.abeja);
     expect(cartaFlor.descripcionCarta(), equals("Flor amapola color morado con abeja"));
+  });  
   });
+
+  group('Carta Arreglo', () {
+    test('Si al constructor como insecto se le pasa un Insecto.noInsecto', () {
+    expect(() => CartaArreglo(TipoFlor.amapola, ColorFlor.amarillo, Insecto.noInsecto), throwsA(isA<ValorInsectoNoValido>()));
+  });
+  });
+  
 }
 
-enum TipoFlor {crisantemo, margarita, amapola, lirio, tulipan}
-enum ColorFlor {blanco, amarillo, naranja, rosa, morado}
-enum Insecto {abeja, escarabajo, mariposa, mariquita, polilla, noInsecto}
-class CartaFlor{
-    
+class ValorInsectoNoValido implements Exception{}
+class CartaArreglo{
     late final TipoFlor _tipoFlor;
     late final ColorFlor _colorFlor;
     late final Insecto _insecto;
@@ -26,19 +32,15 @@ class CartaFlor{
     ColorFlor get getColorFlor => _colorFlor;
     Insecto get getInsecto => _insecto;
 
-    CartaFlor({required TipoFlor tipoFlor, required ColorFlor colorFlor, Insecto insecto = Insecto.noInsecto}){
+    CartaArreglo(TipoFlor tipoFlor, ColorFlor colorFlor, Insecto insecto){
       _tipoFlor = tipoFlor;
       _colorFlor = colorFlor;
+      if(insecto == Insecto.noInsecto){
+        throw ValorInsectoNoValido();  
+      }
       _insecto = insecto;
     }
 
-  String descripcionCarta() {
-    String tipoFlor = _tipoFlor.name;
-    String colorFlor = _colorFlor.name;
-    if(_insecto == Insecto.noInsecto){
-      return "Flor $tipoFlor color $colorFlor";
-    }
-    String insecto = _insecto.name;
-    return "Flor $tipoFlor color $colorFlor con $insecto";
-  }
+
+
 }
