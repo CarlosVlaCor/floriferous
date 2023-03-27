@@ -1,4 +1,5 @@
 import 'package:floriferous/carta_flor.dart';
+import 'package:floriferous/carta_arreglo.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -23,37 +24,15 @@ void main() {
     CartaArreglo cartaArreglo = CartaArreglo(TipoFlor.amapola, ColorFlor.blanco, Insecto.abeja);
     expect(cartaArreglo.descripcionCarta(), equals("Flor: amapola, color: blanco, insecto: abeja"));
   });
+
+  test('Si CartaArreglo(TipoFlor.amapola, ColorFlor.naranja, Insecto.polilla) se puntua con el tipo de flor', () {
+    CartaFlor cartaFlor = CartaFlor(tipoFlor: TipoFlor.amapola, colorFlor: ColorFlor.naranja);
+    CartaArreglo cartaArreglo = CartaArreglo(TipoFlor.amapola, ColorFlor.naranja, Insecto.polilla);
+    cartaArreglo.puntuarArreglo(cartaFlor, ParametroCarta.flor);
+    expect(cartaArreglo.puntos, equals(1));
   });
   
-}
 
-class ValorInsectoNoValido implements Exception{}
-class CartaArreglo{
-    late final TipoFlor _tipoFlor;
-    late final ColorFlor _colorFlor;
-    late final Insecto _insecto;
-
-    TipoFlor get getTipoFlor => _tipoFlor;
-    ColorFlor get getColorFlor => _colorFlor;
-    Insecto get getInsecto => _insecto;
-
-    CartaArreglo(TipoFlor tipoFlor, ColorFlor colorFlor, Insecto insecto){
-      _tipoFlor = tipoFlor;
-      _colorFlor = colorFlor;
-      if(insecto == Insecto.noInsecto){
-        throw ValorInsectoNoValido();  
-      }
-      _insecto = insecto;
-    }
-
-    String descripcionCarta(){
-      String tipoFlor = _tipoFlor.name;
-      String colorFlor = _colorFlor.name;
-      String insecto = _insecto.name;
-
-      return "Flor: $tipoFlor, color: $colorFlor, insecto: $insecto";
-    }
-
-
-
+  });
+  
 }
