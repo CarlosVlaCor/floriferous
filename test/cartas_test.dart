@@ -18,6 +18,11 @@ void main() {
     test('Si al constructor como insecto se le pasa un Insecto.noInsecto', () {
     expect(() => CartaArreglo(TipoFlor.amapola, ColorFlor.amarillo, Insecto.noInsecto), throwsA(isA<ValorInsectoNoValido>()));
   });
+
+  test('Si CartaArreglo(TipoFlor.amapola, ColorFlor.blanco, Insecto.abeja) la descripcion sera Flor: amapola, color: blanco, insecto: abeja', () {
+    CartaArreglo cartaArreglo = CartaArreglo(TipoFlor.amapola, ColorFlor.blanco, Insecto.abeja);
+    expect(cartaArreglo.descripcionCarta(), equals("Flor: amapola, color: blanco, insecto: abeja"));
+  });
   });
   
 }
@@ -39,6 +44,14 @@ class CartaArreglo{
         throw ValorInsectoNoValido();  
       }
       _insecto = insecto;
+    }
+
+    String descripcionCarta(){
+      String tipoFlor = _tipoFlor.name;
+      String colorFlor = _colorFlor.name;
+      String insecto = _insecto.name;
+
+      return "Flor: $tipoFlor, color: $colorFlor, insecto: $insecto";
     }
 
 
