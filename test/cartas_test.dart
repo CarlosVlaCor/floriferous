@@ -39,6 +39,26 @@ void main() {
     cartaArreglo.puntuarArreglo(cartaFlor, ParametroCarta.flor);
     expect(cartaArreglo.puntos, equals(1));
   });
+
+  test('Si se puntea 2 parametros de una cartaArreglo', () {
+    CartaFlor cartaFlor = CartaFlor(tipoFlor: TipoFlor.amapola, colorFlor: ColorFlor.naranja);
+    CartaFlor otraCartaFlor = CartaFlor(tipoFlor: TipoFlor.crisantemo, colorFlor: ColorFlor.naranja);
+    CartaArreglo cartaArreglo = CartaArreglo(TipoFlor.amapola, ColorFlor.naranja, Insecto.polilla);
+    cartaArreglo.puntuarArreglo(cartaFlor, ParametroCarta.flor);
+    cartaArreglo.puntuarArreglo(otraCartaFlor, ParametroCarta.color);
+    expect(cartaArreglo.puntos, equals(3));
+  });
+
+  test('Si se puntea 3 parametros de una cartaArreglo', () {
+    CartaFlor cartaFlor = CartaFlor(tipoFlor: TipoFlor.amapola, colorFlor: ColorFlor.naranja);
+    CartaFlor otraCartaFlor = CartaFlor(tipoFlor: TipoFlor.crisantemo, colorFlor: ColorFlor.naranja);
+    CartaFlor terceraCartaFlor = CartaFlor(tipoFlor: TipoFlor.lirio, colorFlor: ColorFlor.rosa, insecto: Insecto.polilla);
+    CartaArreglo cartaArreglo = CartaArreglo(TipoFlor.amapola, ColorFlor.naranja, Insecto.polilla);
+    cartaArreglo.puntuarArreglo(cartaFlor, ParametroCarta.flor);
+    cartaArreglo.puntuarArreglo(otraCartaFlor, ParametroCarta.color);
+    cartaArreglo.puntuarArreglo(terceraCartaFlor, ParametroCarta.insecto);
+    expect(cartaArreglo.puntos, equals(5));
+  });
   });
   
 }
