@@ -1,8 +1,10 @@
 
+import 'package:equatable/equatable.dart';
+
 enum TipoFlor {crisantemo, margarita, amapola, lirio, tulipan}
 enum ColorFlor {blanco, amarillo, naranja, rosa, morado}
 enum Insecto {abeja, escarabajo, mariposa, mariquita, polilla, noInsecto}
-class CartaFlor{
+class CartaFlor extends Equatable{
     
     late final TipoFlor _tipoFlor;
     late final ColorFlor _colorFlor;
@@ -27,4 +29,7 @@ class CartaFlor{
     String insecto = _insecto.name;
     return "Flor $tipoFlor color $colorFlor con $insecto";
   }
+  
+  @override
+  List<Object?> get props => [_tipoFlor, _colorFlor, _insecto];
 }

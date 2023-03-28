@@ -32,12 +32,12 @@ void main() {
     expect(cartaArreglo.puntos, equals(1));
   });
 
-   test('Si se quiere volver a puntear el mismo parametro de la flor de Carta arreglo, no se puntua', () {
+   test('Si se quiere volver a puntear el mismo parametro de la flor de Carta arreglo', () {
     CartaFlor cartaFlor = CartaFlor(tipoFlor: TipoFlor.amapola, colorFlor: ColorFlor.naranja);
+    CartaFlor cartaFlor2 = CartaFlor(tipoFlor: TipoFlor.amapola, colorFlor: ColorFlor.naranja, insecto: Insecto.abeja);
     CartaArreglo cartaArreglo = CartaArreglo(TipoFlor.amapola, ColorFlor.naranja, Insecto.polilla);
     cartaArreglo.puntuarArreglo(cartaFlor, ParametroCarta.flor);
-    cartaArreglo.puntuarArreglo(cartaFlor, ParametroCarta.flor);
-    expect(cartaArreglo.puntos, equals(1));
+    expect(() => cartaArreglo.puntuarArreglo(cartaFlor2, ParametroCarta.flor), throwsA(isA<ParametroYaPuntuado>()));
   });
 
   test('Si se puntea 2 parametros de una cartaArreglo', () {
@@ -58,6 +58,13 @@ void main() {
     cartaArreglo.puntuarArreglo(otraCartaFlor, ParametroCarta.color);
     cartaArreglo.puntuarArreglo(terceraCartaFlor, ParametroCarta.insecto);
     expect(cartaArreglo.puntos, equals(5));
+  });
+
+  test('Si se quiere volver a puntear con una carta ya punteada', () {
+    CartaFlor cartaFlor = CartaFlor(tipoFlor: TipoFlor.amapola, colorFlor: ColorFlor.naranja);
+    CartaArreglo cartaArreglo = CartaArreglo(TipoFlor.amapola, ColorFlor.naranja, Insecto.polilla);
+    cartaArreglo.puntuarArreglo(cartaFlor, ParametroCarta.flor);
+    expect(() => cartaArreglo.puntuarArreglo(cartaFlor, ParametroCarta.color), throwsA(isA<CartaYaUtilizada>()));
   });
   });
   
